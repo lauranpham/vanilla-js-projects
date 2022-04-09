@@ -5,6 +5,8 @@ const questions = document.querySelectorAll('.question');
 questions.forEach((question) => {
     const btn = question.querySelector('.question-btn');
     btn.addEventListener('click', () => {
+        // on click, remove show-text on other questions
+        questions.forEach((item) => item.classList.remove('show-text'))
         question.classList.toggle('show-text')
     })
 })
