@@ -75,12 +75,31 @@ const menu = [
 
 const sectionCenter = document.querySelector('.section-center');
 
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+// load items
 window.addEventListener('DOMContentLoaded', () => {
-	displayMenuItems(menu)
+	displayMenuItems(menu);
+});
+
+// filter items
+filterBtns.forEach((btn) => {
+	btn.addEventListener('click', (e) => {
+		// dataset property on e.currentTarget allows addition of attributes prefixed by data e.g. data-category, data-id
+		// console.log(e.currentTarget.dataset)
+		// DOMStringMap {id: 'lunch'}
+		const category = e.currentTarget.dataset.id;
+		const filteredMenu = menu.filter((item) => item.category === category);
+		if (category === 'all') {
+			displayMenuItems(menu);
+		} else {
+			displayMenuItems(filteredMenu);
+		}
+	});
 });
 
 const displayMenuItems = (menu) => {
-  const displayMenu = menu
+	const displayMenu = menu
 		.map((item) => {
 			return `<article class="menu-item">
     <img src=${item.img} alt=${item.title} class="photo">
@@ -95,5 +114,5 @@ const displayMenuItems = (menu) => {
 		})
 		.join('');
 
-  sectionCenter.innerHTML = displayMenu;
-}
+	sectionCenter.innerHTML = displayMenu;
+};
