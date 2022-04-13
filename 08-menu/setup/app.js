@@ -76,9 +76,7 @@ const menu = [
 const sectionCenter = document.querySelector('.section-center');
 
 window.addEventListener('DOMContentLoaded', () => {
-	const displayMenu = displayMenuItems(menu)
-
-  sectionCenter.innerHTML = displayMenu;
+	displayMenuItems(menu)
 });
 
 const displayMenuItems = (menu) => {
@@ -97,5 +95,5 @@ const displayMenuItems = (menu) => {
 		})
 		.join('');
 
-  return displayMenu;
+  sectionCenter.innerHTML = displayMenu;
 }
