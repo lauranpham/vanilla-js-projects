@@ -87,7 +87,7 @@ const filterBtnContainer = document.querySelector('.btn-container');
 // load items
 window.addEventListener('DOMContentLoaded', () => {
 	displayMenuItems(menu);
-	displayMenuButtons(menu);
+	displayMenuButtons();
 });
 
 // filter items
@@ -128,7 +128,7 @@ const displayMenuItems = (menu) => {
 	sectionCenter.innerHTML = displayMenu;
 };
 
-const displayMenuButtons = (menu) => {
+const displayMenuButtons = () => {
 	// using reduce to return an array of uniq categories
 	const uniqCategories = menu.reduce(
 		(values, item) => {
