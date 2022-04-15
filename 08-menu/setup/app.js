@@ -71,24 +71,24 @@ const menu = [
 		img: './images/item-9.jpeg',
 		desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
 	},
-  {
-    id: 10,
-    title: "bison steak",
-    category: "dinner",
-    price: 22.99,
-    img: "./images/item-10.jpeg",
-    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
-  },
+	{
+		id: 10,
+		title: 'bison steak',
+		category: 'dinner',
+		price: 22.99,
+		img: './images/item-10.jpeg',
+		desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+	},
 ];
 
 const sectionCenter = document.querySelector('.section-center');
+const filterBtnContainer = document.querySelector('.btn-container');
 
 const filterBtns = document.querySelectorAll('.filter-btn');
-
 // load items
 window.addEventListener('DOMContentLoaded', () => {
 	displayMenuItems(menu);
-  displayMenuButtons(menu);
+	displayMenuButtons(menu);
 });
 
 // filter items
@@ -127,14 +127,21 @@ const displayMenuItems = (menu) => {
 };
 
 const displayMenuButtons = (menu) => {
-  // using reduce to return an array of uniq categories
-  const uniqCategories = menu.reduce((values, item) => {
-    const {category} = item;
-    if (!values.includes(category)) {
-      values.push(category);
-    }
-    return values
-  }, ['all'])
-  console.log('uniqcategories', uniqCategories)
-	sectionCenter.innerHTML = displayMenu;
+	// using reduce to return an array of uniq categories
+	const uniqCategories = menu.reduce(
+		(values, item) => {
+			const { category } = item;
+			if (!values.includes(category)) {
+				values.push(category);
+			}
+			return values;
+		},
+		['all']
+	);
+	const categoryBtns = uniqCategories
+		.map((category) => {
+			return `<button class="filter-btn" type="button" data-id=${category}>${category}</button>`;
+		})
+		.join('');
+	filterBtnContainer.innerHTML = categoryBtns;
 };
