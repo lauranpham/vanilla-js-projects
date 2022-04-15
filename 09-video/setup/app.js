@@ -15,3 +15,13 @@ btn.addEventListener('click', () => {
 		video.play();
 	}
 });
+
+// DOMContentLoaded - once the page is loaded without
+// without for stylesheets, images and subframes to finish loading
+// load event - fired when WHOLE page is loaded including dependent resources like stylesheets and images
+
+const preloader = document.querySelector('.preloader');
+
+window.addEventListener('load', () => {
+	preloader.classList.add('hide-preloader');
+});
