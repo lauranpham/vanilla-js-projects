@@ -84,7 +84,6 @@ const menu = [
 const sectionCenter = document.querySelector('.section-center');
 const filterBtnContainer = document.querySelector('.btn-container');
 
-const filterBtns = document.querySelectorAll('.filter-btn');
 // load items
 window.addEventListener('DOMContentLoaded', () => {
 	displayMenuItems(menu);
@@ -92,20 +91,23 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // filter items
-filterBtns.forEach((btn) => {
-	btn.addEventListener('click', (e) => {
-		// dataset property on e.currentTarget allows addition of attributes prefixed by data e.g. data-category, data-id
-		// console.log(e.currentTarget.dataset)
-		// DOMStringMap {id: 'lunch'}
-		const category = e.currentTarget.dataset.id;
-		const filteredMenu = menu.filter((item) => item.category === category);
-		if (category === 'all') {
-			displayMenuItems(menu);
-		} else {
-			displayMenuItems(filteredMenu);
-		}
+const handleClickForCategoryButtons = () => {
+	const filterBtns = document.querySelectorAll('.filter-btn');
+	filterBtns.forEach((btn) => {
+		btn.addEventListener('click', (e) => {
+			// dataset property on e.currentTarget allows addition of attributes prefixed by data e.g. data-category, data-id
+			// console.log(e.currentTarget.dataset)
+			// DOMStringMap {id: 'lunch'}
+			const category = e.currentTarget.dataset.id;
+			const filteredMenu = menu.filter((item) => item.category === category);
+			if (category === 'all') {
+				displayMenuItems(menu);
+			} else {
+				displayMenuItems(filteredMenu);
+			}
+		});
 	});
-});
+}
 
 const displayMenuItems = (menu) => {
 	const displayMenu = menu
@@ -144,4 +146,5 @@ const displayMenuButtons = (menu) => {
 		})
 		.join('');
 	filterBtnContainer.innerHTML = categoryBtns;
+	handleClickForCategoryButtons();
 };
