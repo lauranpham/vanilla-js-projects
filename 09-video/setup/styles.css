@@ -255,6 +255,8 @@ h1 {
   left: 50%;
 }
 /* header after */
+/* ::after creates a pseudo element that is the last child of the selected element */
+/* often used to add cosmetic content */
 header::after {
   content: "";
   position: absolute;
