@@ -60,6 +60,7 @@ Global Styles
 ===============
 */
 html {
+  /* this enables the movement to different section to be smooth */
   scroll-behavior: smooth;
 }
 *,
