@@ -14,8 +14,8 @@ const links = document.querySelector('.links');
 navToggle.addEventListener('click', () => {
 	// add show-links class with set height - limitation when links list is updated
 	// linksContainer.classList.toggle('show-links')
-	
-    // calculate dynamic height of the links
+
+	// calculate dynamic height of the links
 	// linksContainer has been set as 0 however the links div will still retain its height
 	// links needs to have a height of auto !important since we are adding inline css which overrides
 	const containerHeight = linksContainer.getBoundingClientRect().height;
@@ -27,6 +27,18 @@ navToggle.addEventListener('click', () => {
 	}
 });
 // ********** fixed navbar ************
-
+// using scroll event and pageYOffset
+const navbar = document.getElementsById('nav');
+const topLink = document.querySelector('.top-link');
+window.addEventListener('scroll', () => {
+	// add fixed navbar and top-link button if the pageYOffset is greater than height of navbar
+	const scrollHeight = window.pageYOffset;
+	const navHeight = navbar.getBoundingClientRect().height;
+	if (scrollHeight > navHeight) {
+		navbar.classList.add('fixed-nav');
+	} else {
+		navbar.classList.remove('fixed-nav');
+	}
+});
 // ********** smooth scroll ************
 // select links
