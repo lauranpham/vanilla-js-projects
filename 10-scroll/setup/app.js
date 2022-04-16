@@ -28,7 +28,7 @@ navToggle.addEventListener('click', () => {
 });
 // ********** fixed navbar ************
 // using scroll event and pageYOffset
-const navbar = document.getElementsById('nav');
+const navbar = document.getElementById('nav');
 const topLink = document.querySelector('.top-link');
 window.addEventListener('scroll', () => {
 	// add fixed navbar and top-link button if the pageYOffset is greater than height of navbar
@@ -39,6 +39,12 @@ window.addEventListener('scroll', () => {
 	} else {
 		navbar.classList.remove('fixed-nav');
 	}
+
+    if (scrollHeight > 500) {
+        topLink.classList.add('show-link')
+    } else {
+        topLink.classList.remove('show-link')
+    }
 });
 // ********** smooth scroll ************
 // select links
