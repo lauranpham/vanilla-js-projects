@@ -4,17 +4,28 @@
 //offsetTop - A Number, representing the top position of the element, in pixels
 
 // ********** set date ************
-const date = document.getElementById('date')
+const date = document.getElementById('date');
 date.innerHTML = new Date().getFullYear();
 // ********** close links ************
-const navToggle = document.querySelector('.nav-toggle')
-const linksContainer = document.querySelector('.links-container')
-const links = document.querySelector('.links')
+const navToggle = document.querySelector('.nav-toggle');
+const linksContainer = document.querySelector('.links-container');
+const links = document.querySelector('.links');
 
 navToggle.addEventListener('click', () => {
-    // add show-links class with set height
-    linksContainer.classList.toggle('show-links')
-})
+	// add show-links class with set height - limitation when links list is updated
+	// linksContainer.classList.toggle('show-links')
+	
+    // calculate dynamic height of the links
+	// linksContainer has been set as 0 however the links div will still retain its height
+	// links needs to have a height of auto !important since we are adding inline css which overrides
+	const containerHeight = linksContainer.getBoundingClientRect().height;
+	const linksHeight = links.getBoundingClientRect().height;
+	if (containerHeight === 0) {
+		linksContainer.style.height = `${linksHeight}px`;
+	} else {
+		linksContainer.style.height = 0;
+	}
+});
 // ********** fixed navbar ************
 
 // ********** smooth scroll ************
