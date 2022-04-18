@@ -48,3 +48,29 @@ window.addEventListener('scroll', () => {
 });
 // ********** smooth scroll ************
 // select links
+const scrollLinks = document.querySelectorAll('.scroll-link');
+
+scrollLinks.forEach((link)=>{
+    link.addEventListener('click', (e) => {
+        // prevent default scroll to middle of section
+        e.preventDefault();
+        // navigate to specific spot. slice 1 will slice starting at index of 1
+        const id = e.currentTarget.getAttribute('href').slice(1);
+        const section = document.getElementById(id);
+        const navHeight = navbar.getBoundingClientRect().height;
+        const containerHeight = linksContainer.getBoundingClientRect().height;
+        const fixedNav = navbar.classList.contains('fixed-nav');
+        let position = section.offsetTop - navHeight;
+        // section heading is covered by fixed nav
+        if (!fixedNav) {
+            position = position - navHeight;
+        }
+        // if there is an navlist container
+        if (containerHeight > 82) {
+            position = position + containerHeight
+        }
+        window.scrollTo({left: 0, top: position});
+
+        linksContainer.style.height = 0;
+    })
+})
