@@ -46,7 +46,7 @@ giveaway.textContent = `giveaway ends on ${day}, ${date} ${month} ${year} ${hour
 // future time in ms
 const futureTime = futureDate.getTime();
 
-const getRemainingTime = () => {
+const getRemainingTime = (countdown) => {
 	const today = new Date().getTime();
 	const t = futureTime - today;
 	// 1s = 1000ms
@@ -76,12 +76,12 @@ const getRemainingTime = () => {
 		item.innerHTML = format(values[index]);
 	});
 	if (t < 0) {
-		clearInterval(countdown)
-		deadline.innerHTML = `<h4 class="expired"> sorry, this giveaway has expired</h4>`
+		clearInterval(countdown);
+		deadline.innerHTML = `<h4 class="expired"> sorry, this giveaway has expired</h4>`;
 	}
 };
 
-// countdown 
-let countdown = setInterval(getRemainingTime, 1000)
+// countdown
+let countdown = setInterval(getRemainingTime, 1000);
 
 // since getRemainingTime is called as a callback from the countdown variable declaration, it has access to this variable value
