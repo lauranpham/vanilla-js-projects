@@ -31,9 +31,9 @@ form.addEventListener('submit', (e) => {
 	console.log(value);
 	let displayParagraphs = text
 		.slice(0, value)
-		.map((paragraph) => {
-			return `<p class="result">${paragraph}</p>`;
+		.map((item) => {
+			return `<p class="result">${item}</p>`;
 		})
-		.join();
+		.join("");
 	result.innerHTML = displayParagraphs;
 });
