@@ -22,6 +22,10 @@ const displayAlert = (message, type) => {
 
 const setBackToDefault = () => {
 	console.log('setting back to default');
+    grocery.value = '';
+    editFlag = false;
+    editId = '';
+    submitBtn.textContent = 'submit'
 };
 
 const addItem = (e) => {
