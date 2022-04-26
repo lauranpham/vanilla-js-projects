@@ -12,13 +12,17 @@ let editFlag = false;
 let editId = '';
 // ****** FUNCTIONS **********
 const displayAlert = (message, type) => {
-    alert.textContent = message;
-    alert.classList.add(`alert-${type}`);
-    setTimeout(() => {
-        alert.textContent = '';
-        alert.classList.remove(`alert-${type}`);    
-    }, 5000)
-}
+	alert.textContent = message;
+	alert.classList.add(`alert-${type}`);
+	setTimeout(() => {
+		alert.textContent = '';
+		alert.classList.remove(`alert-${type}`);
+	}, 5000);
+};
+
+const setBackToDefault = () => {
+	console.log('setting back to default');
+};
 
 const addItem = (e) => {
 	e.preventDefault();
@@ -27,18 +31,44 @@ const addItem = (e) => {
 	const id = Date.now().toString();
 	if (value && !editFlag) {
 		console.log('add item to list');
+		const element = document.createElement('article');
+		// add class
+		element.classList.add('grocery-item');
+		// add id
+		const attr = document.createAttribute('data-id');
+		attr.value = id;
+		element.setAttributeNode(attr);
+		element.innerHTML = `<p class="title">${value}</p>
+        <div class="btn-container">
+          <button type="button" class="edit-btn">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button type="button" class="delete-btn">
+            <i class="fas fa-trash"></i>
+          </button>`;
+		// append child to list
+		list.appendChild(element);
+		// display alert
+		displayAlert('item added to list', 'success');
+		// show container
+		container.classList.add('show-container');
+		// add to local storage
+		addToLocalStorage(id, value);
+		setBackToDefault();
 	} else if (value && editFlag) {
 		console.log('edit item');
 	} else {
-        displayAlert('empty alert', 'danger')
+		displayAlert('please enter value', 'danger');
 	}
 };
-
 
 // ****** EVENT LISTENERS **********
 // submit form
 form.addEventListener('submit', addItem);
 
 // ****** LOCAL STORAGE **********
+const addToLocalStorage = (id, value) => {
+	console.log('added to local storage');
+};
 
 // ****** SETUP ITEMS **********
