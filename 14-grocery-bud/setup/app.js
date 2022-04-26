@@ -20,6 +20,18 @@ const displayAlert = (message, type) => {
 	}, 5000);
 };
 
+const clearItems = () => {
+    // remove all grocery items
+    const items = document.querySelectorAll('.grocery-item');
+    if (items.length > 0) {
+        items.forEach((item) => list.removeChild(item))
+    }
+    container.classList.remove('show-container');
+    displayAlert('empty list', 'danger')
+    setBackToDefault();
+    // localStorage.removeItem('list')
+}
+
 const setBackToDefault = () => {
 	console.log('setting back to default');
     grocery.value = '';
@@ -69,7 +81,7 @@ const addItem = (e) => {
 // ****** EVENT LISTENERS **********
 // submit form
 form.addEventListener('submit', addItem);
-
+clearBtn.addEventListener('click', clearItems)
 // ****** LOCAL STORAGE **********
 const addToLocalStorage = (id, value) => {
 	console.log('added to local storage');
