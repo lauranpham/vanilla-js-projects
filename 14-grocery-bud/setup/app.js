@@ -113,6 +113,11 @@ const addItem = (e) => {
 		setBackToDefault();
 	} else if (value && editFlag) {
 		console.log('edit item');
+		editElement.innerHTML = value;
+		displayAlert('value changed', 'success');
+		// edit local storage
+		editLocalStorage(editId, value);
+		setBackToDefault();
 	} else {
 		displayAlert('please enter value', 'danger');
 	}
@@ -125,6 +130,10 @@ clearBtn.addEventListener('click', clearItems);
 // ****** LOCAL STORAGE **********
 const addToLocalStorage = (id, value) => {
 	console.log('added to local storage');
+};
+
+const editLocalStorage = (id, value) => {
+	console.log('edited to local storage');
 };
 
 const removeFromLocalStorage = (id) => {
