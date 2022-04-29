@@ -42,14 +42,27 @@ const deleteItem = (e) => {
 	console.log("delete item")
 	// pass event object to access parent container of grocery-item
 	const element = e.currentTarget.parentElement.parentElement
+	const id = element.dataset.id;
 	list.removeChild(element)
 	if (list.children.length === 0) {
 		container.classList.remove('show-container');
 	}
+	displayAlert('item removed', 'danger');
+	setBackToDefault();
+	// remove from local storage 
+	// removeFromLocalStorage(id)
 }
 
-const editItem = () => {
+const editItem = (e) => {
 	console.log("edit item")
+	const element = e.currentTarget.parentElement.parentElement
+	// set edit item getting the title
+	editElement = e.currentTarget.parentElement.previousElementSibling;
+	// set form value 
+	grocery.value = editElement.innerHTML;
+	editFlag = true;
+	editId = element.dataset.id;
+	submitBtn.textContent = 'edit';
 }
 
 const setBackToDefault = () => {
@@ -114,4 +127,7 @@ const addToLocalStorage = (id, value) => {
 	console.log('added to local storage');
 };
 
+const removeFromLocalStorage = (id) => {
+	console.log('removed to local storage');
+};
 // ****** SETUP ITEMS **********
