@@ -38,6 +38,14 @@ const clearItems = () => {
 	// localStorage.removeItem('list')
 };
 
+const deleteItem = () => {
+	console.log("delete item")
+}
+
+const editItem = () => {
+	console.log("edit item")
+}
+
 const setBackToDefault = () => {
 	console.log('setting back to default');
 	grocery.value = '';
@@ -68,6 +76,13 @@ const addItem = (e) => {
           <button type="button" class="delete-btn">
             <i class="fas fa-trash"></i>
           </button>`;
+		// edit and delete functions need to be created only once the item is created
+		// edit function
+		// delete function 
+		const deleteBtn = element.querySelector('.delete-btn')
+		const editBtn = element.querySelector('.edit-btn')
+		deleteBtn.addEventListener('click', deleteItem)
+		editBtn.addEventListener('click', editItem)
 		// append child to list
 		list.appendChild(element);
 		// display alert
