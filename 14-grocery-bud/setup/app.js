@@ -18,6 +18,13 @@ let editId = '';
 // getItem
 // removeItem
 // save as strings
+
+const getLocalStorage = () => {
+	return localStorage.getItem('list')
+		? JSON.parse(localStorage.getItem('list'))
+		: [];
+};
+
 const addToLocalStorage = (id, value) => {
 	console.log('added to local storage');
 	const grocery = { id, value };
@@ -28,18 +35,15 @@ const addToLocalStorage = (id, value) => {
 	localStorage.setItem('list', JSON.stringify(items));
 };
 
-const getLocalStorage = () => {
-	return localStorage.getItem('list')
-		? JSON.parse(localStorage.getItem('list'))
-		: [];
-};
-
 const editLocalStorage = (id, value) => {
 	console.log('edited to local storage');
 };
 
 const removeFromLocalStorage = (id) => {
 	console.log('removed to local storage');
+	let items = getLocalStorage();
+	items = items.filter((item) => item.id !== id)
+	localStorage.setItem('list', JSON.stringify(items));
 };
 
 // ****** FUNCTIONS **********
@@ -89,7 +93,7 @@ const deleteItem = (e) => {
 	displayAlert('item removed', 'danger');
 	setBackToDefault();
 	// remove from local storage
-	// removeFromLocalStorage(id)
+	removeFromLocalStorage(id)
 };
 
 const editItem = (e) => {
