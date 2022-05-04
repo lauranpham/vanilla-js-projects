@@ -52,7 +52,7 @@ const removeFromLocalStorage = (id) => {
 const displayItems = () => {
 	const items = getLocalStorage();
 	if (items.length > 0) {
-		items.forEach((item) => addItemToList(item.id, item.value));
+		items.forEach((item) => createListItem(item.id, item.value));
 	}
 };
 const displayAlert = (message, type) => {
@@ -124,7 +124,7 @@ const addItem = (e) => {
 	const id = Date.now().toString();
 	if (value && !editFlag) {
 		console.log('add item to list');
-		addItemToList(id, value);
+		createListItem(id, value);
 		displayAlert('item added to list', 'success');
 		// add to local storage
 		addToLocalStorage(id, value);
@@ -141,7 +141,7 @@ const addItem = (e) => {
 	}
 };
 
-const addItemToList = (id, value) => {
+const createListItem = (id, value) => {
 	const element = document.createElement('article');
 	// add class
 	element.classList.add('grocery-item');
@@ -173,7 +173,9 @@ const addItemToList = (id, value) => {
 // ****** EVENT LISTENERS **********
 // submit form
 form.addEventListener('submit', addItem);
+// clear btn
 clearBtn.addEventListener('click', clearItems);
+// display stored items on dom content loaded
 window.addEventListener('DOMContentLoaded', displayItems);
 
 // ****** SETUP ITEMS **********
