@@ -73,9 +73,16 @@ const setBackToDefault = () => {
 	submitBtn.textContent = 'submit';
 };
 
-const addItem = (e) => {
-	e.preventDefault();
-	const value = grocery.value;
+const displayItems = () => {
+	const storedList = JSON.parse(localStorage.getItem('list'))
+	if (storedList.length > 0) {
+		storedList.forEach((item)=> addItem(null, item.value, item.id))
+	}
+}
+
+const addItem = (e, localValue, localId) => {
+	e?.preventDefault();
+	const value = localValue || grocery.value;
 	// create a unique id with the current date time
 	const id = Date.now().toString();
 	if (value && !editFlag) {
@@ -85,7 +92,7 @@ const addItem = (e) => {
 		element.classList.add('grocery-item');
 		// add id
 		const attr = document.createAttribute('data-id');
-		attr.value = id;
+		attr.value = localId || id;
 		element.setAttributeNode(attr);
 		element.innerHTML = `<p class="title">${value}</p>
         <div class="btn-container">
@@ -127,9 +134,22 @@ const addItem = (e) => {
 // submit form
 form.addEventListener('submit', addItem);
 clearBtn.addEventListener('click', clearItems);
+window.addEventListener('DOMContentLoaded', displayItems)
+
 // ****** LOCAL STORAGE **********
+// storing as key value pairs
+// localStorage api 
+// setItem
+// getItem
+// removeItem
+// save as strings
 const addToLocalStorage = (id, value) => {
 	console.log('added to local storage');
+	const grocery =  {id, value}
+	let items = localStorage.getItem('list')
+	items = items === 'undefined' ? [] : JSON.parse(items);
+	items.push(grocery)
+	localStorage.setItem('list', JSON.stringify(items))
 };
 
 const editLocalStorage = (id, value) => {
