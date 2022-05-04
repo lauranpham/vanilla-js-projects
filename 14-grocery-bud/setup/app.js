@@ -29,14 +29,15 @@ const addToLocalStorage = (id, value) => {
 	console.log('added to local storage');
 	const grocery = { id, value };
 	const items = getLocalStorage();
-	if (!items.includes(grocery)) {
-		items.push(grocery);
-	}
+	items.push(grocery);
 	localStorage.setItem('list', JSON.stringify(items));
 };
 
 const editLocalStorage = (id, value) => {
 	console.log('edited to local storage');
+	let items = getLocalStorage();
+	items.find((item) => item.id === id).value = value
+	localStorage.setItem('list', JSON.stringify(items));
 };
 
 const removeFromLocalStorage = (id) => {
@@ -78,7 +79,7 @@ const clearItems = () => {
 	container.classList.remove('show-container');
 	displayAlert('empty list', 'danger');
 	setBackToDefault();
-	// localStorage.removeItem('list')
+	localStorage.removeItem('list')
 };
 
 const deleteItem = (e) => {
